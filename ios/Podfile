@@ -22,6 +22,10 @@ target 'MoviesApp' do
   #   use_flipper!('Flipper' => '0.75.1', 'Flipper-Folly' => '2.5.3', 'Flipper-RSocket' => '1.3.1')
   # end
 
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
+  pod 'RealmJS', :path => '../node_modules/realm'
+
   post_install do |installer|
     react_native_post_install(installer)
 
