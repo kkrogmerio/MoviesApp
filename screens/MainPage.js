@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
-
   View,
   ActivityIndicator,
-
   Dimensions,
-
   FlatList,
-  Platform
+  Platform,
 } from "react-native";
 import MovieItem from "../components/MovieItem";
 import {
@@ -20,16 +17,12 @@ import SearchBar from "../components/Searchbar";
 import Colors from "../constants/colors";
 import { LinearGradient } from "expo-linear-gradient";
 export default function MainPage(props) {
-  
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [movieTitle, setMovieTitle] = useState("");
   const internet = useSelector((state) => state.net.internetStatus);
   const moviesData = useSelector((state) => state.movie.moviesData);
-  console.log(internet, "RRRRRRRRRRRRRRR");
-  console.log(internet);
   useEffect(async () => {
-    console.log("NU AICIIIIIIIIIIIIIIIIII")
     setIsLoading(true);
     await dispatch(fetchMovieDataRemote(movieTitle));
     setIsLoading(false);
@@ -80,8 +73,6 @@ export default function MainPage(props) {
                   rating={itemData.item.description.vote_average}
                   poster_path={itemData.item.interface.poster_path}
                   backdrop_path={itemData.item.interface.backdrop_path}
-                  
-                  
                   onSelect={() => {
                     props.navigation.navigate("MovieDetails", {
                       adult: itemData.item.description.adult,
@@ -89,8 +80,8 @@ export default function MainPage(props) {
                       overview: itemData.item.description.overview,
                       rating: itemData.item.description.vote_average,
                       backdrop_path: itemData.item.interface.backdrop_path,
-                      release:itemData.item.description.release,
-                      popularity:itemData.item.description.popularity
+                      release: itemData.item.description.release,
+                      popularity: itemData.item.description.popularity,
                     });
                   }}
                 />
@@ -108,11 +99,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-  list:{
-    flexGrow:1
+  list: {
+    flexGrow: 1,
   },
-  listMovies:{
-    flex:1
+  listMovies: {
+    flex: 1,
   },
   container: {
     flex: 1,

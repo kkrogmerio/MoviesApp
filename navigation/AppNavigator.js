@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import MovieNavigator from './MovieNavigator';
 import {useDispatch,useSelector} from 'react-redux'
 import * as Notifications from "expo-notifications";
-import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
-import { insertMoviesDataLocal } from '../store/actions/insertMovieData';
+import  { useNetInfo } from "@react-native-community/netinfo";
+
 export const INTERNET_STATUS = "INTERNET_STATUS";
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

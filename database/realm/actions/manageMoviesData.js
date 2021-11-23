@@ -1,10 +1,11 @@
 import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("graduationProject.db");
-// const Realm= new Realm(databaseOptions);
+const db = SQLite.openDatabase("movies.db");
+
 export const init = () => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
+      
       tx.executeSql(
         "CREATE TABLE IF NOT EXISTS movies (title TEXT,overview TEXT,popularity REAL,adult TEXT,backdrop_path TEXT,poster_path TEXT,vote_average REAL,id INTEGER,release TEXT,vote_count INTEGER);",
         [],
@@ -36,10 +37,32 @@ export const getDataFromDb = () => {
   });
   return promise;
 };
+export const clearDb = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `delete FROM movies`,
+        [],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, err) => {
+          reject(err);
+        }
+      );
+    });
+  });
+  return promise;
+};
 export const insertDataInDb = (data) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
-      console.log(data[0])
+      tx.executeSql(
+        "TRUNCATE TABLE movies",
+        [],
+        (_, result) => {},
+        (_, err) => {}
+      );
       data.map(ie=>
 tx.executeSql(
         `INSERT INTO movies(title,overview,popularity,adult,backdrop_path,poster_path,vote_average,id,release,vote_count) VALUES (?, ?, ?,?,?,?,?,?,?,?);`,
